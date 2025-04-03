@@ -101,7 +101,7 @@ int main() {
 while (1){ // adicionado o laço para poder fazer a repetição da escolha no menu
 
 
-    printf("\nEscolha um atributo para comparar:\n");
+    printf("\nEscolha dois atributo para comparar:\n");
     printf("1 - Populacao\n");
     printf("2 - Area\n");
     printf("3 - PIB\n");
@@ -110,56 +110,55 @@ while (1){ // adicionado o laço para poder fazer a repetição da escolha no me
     printf("6 - PIB Per Capita\n");
     printf("7 - Super Poder\n");
     printf("0 - Sair\n");
-    printf("Digite sua escolha: ");
+    
+    printf("Digite o primeiro atributo: ");
     scanf(" %d", &opcao);
-
-    if (opcao == 0) { // se a opção escolhida for 0 vai sair do jogo
+    if (opcao == 0) {
+        printf("Saindo do jogo...\n");
+        break;
+    }
+    int opcao2;
+    printf("Digite o segundo atributo: ");
+    scanf(" %d", &opcao2);
+    if (opcao2 == 0) {
         printf("Saindo do jogo...\n");
         break;
     }
 
-    float valor1 = 0, valor2 = 0;
-    const char *atributo = "";
+    float valor1 = 0, valor2 = 0, valor1_2 = 0, valor2_2 = 0;
+    const char *atributo1 = "", *atributo2 = "";
 
     switch (opcao) {
-    case 1:
-        valor1 = populacao1; valor2 = populacao2; atributo = "População";
-        break;
-    case 2:
-        valor1 = area1; valor2 = area2; atributo = "Área";
-        break;
-    case 3:
-        valor1 = pib1; valor2 = pib2; atributo = "PIB";
-        break;
-    case 4:
-        valor1 = pontosTuristicos1; valor2 = pontosTuristicos2; atributo = "Numero de Pontos Turísticos";
-        break;  
-    case 5:
-        valor1 = densidade2; valor2 = densidade1; atributo = "Densidade Demografica";
-        break;
-    case 6:
-        valor1 = pibpercapita1; valor2 = pibpercapita2; atributo = "PIB Per Capita";
-        break;
-    case 7:
-        valor1 = superpoder1; valor2 = superpoder2; atributo = "Super Poder";
-        break;                
-    default:
-        printf("Opcção Inválida! Tente novamente. \n");
-        continue; // estrutura de repetição do codigo
+        case 1: valor1 = populacao1; valor2 = populacao2; atributo1 = "População"; break;
+        case 2: valor1 = area1; valor2 = area2; atributo1 = "Área"; break;
+        case 3: valor1 = pib1; valor2 = pib2; atributo1 = "PIB"; break;
+        case 4: valor1 = pontosTuristicos1; valor2 = pontosTuristicos2; atributo1 = "Pontos Turísticos"; break;
+        case 5: valor1 = -densidade1; valor2 = -densidade2; atributo1 = "Densidade Demográfica"; break;
+        case 6: valor1 = pibpercapita1; valor2 = pibpercapita2; atributo1 = "PIB per Capita"; break;
+        case 7: valor1 = superpoder1; valor2 = superpoder2; atributo1 = "Super Poder"; break;
+        default: printf("Opção 1 inválida!\n"); continue;
     }
 
-    printf("\n(Atributo: %s)\n", atributo);
-    printf("%s (%c): %.2f\n", nomeCidade1, estado1, valor1);
-    printf("%s (%c): %.2f\n", nomeCidade2, estado2, valor2);
-
-    if (valor1 == valor2) {
-      printf("Resultado: Empate!!\n");
-    } else if (valor1 > valor2) {
-        printf("Resultado: %s venceu!\n", nomeCidade1);
-    } else {
-        printf("Resultado: %s venceu!\n", nomeCidade2);
+    switch (opcao2) {
+        case 1: valor1_2 = populacao1; valor2_2 = populacao2; atributo2 = "População"; break;
+        case 2: valor1_2 = area1; valor2_2 = area2; atributo2 = "Área"; break;
+        case 3: valor1_2 = pib1; valor2_2 = pib2; atributo2 = "PIB"; break;
+        case 4: valor1_2 = pontosTuristicos1; valor2_2 = pontosTuristicos2; atributo2 = "Pontos Turísticos"; break;
+        case 5: valor1_2 = -densidade1; valor2_2 = -densidade2; atributo2 = "Densidade Demográfica"; break;
+        case 6: valor1_2 = pibpercapita1; valor2_2 = pibpercapita2; atributo2 = "PIB per Capita"; break;
+        case 7: valor1_2 = superpoder1; valor2_2 = superpoder2; atributo2 = "Super Poder"; break;
+        default: printf("Opção 2 inválida!\n"); continue;
     }
 
+    float total1 = valor1 + valor1_2; // usando o float inclui as variaveis total 1 e total 2
+    float total2 = valor2 + valor2_2;
+
+
+    printf("\nComparando os atributos: %s + %s\n", atributo1, atributo2);
+    printf("%s (%c): %.2f\n", nomeCidade1, estado1, total1);
+    printf("%s (%c): %.2f\n", nomeCidade2, estado2, total2);
+
+    (total1 == total2) ? printf("Resultado: Empate!!!\n") : printf("Resultado: %s venceu!!!\n",  (total1 > total2 ? nomeCidade1 : nomeCidade2));// utilizei o ? para melhorar a logica do resultado
 }
 
 return 0;
